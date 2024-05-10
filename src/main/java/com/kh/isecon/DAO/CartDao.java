@@ -74,5 +74,25 @@ public class CartDao {
         }
         return list;
     }
+    public void saleDeleteCart(List<Integer> arrayCno, int uno) {
+        try {
+            for (int i : arrayCno) {
+                String query = "DELETE FROM CART" +
+                        "WHERE = CNO" + i + " AND UNO = " + uno ;
+
+                conn = Common.getConnection();
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+
+                Common.close(rs);
+                Common.close(stmt);
+                Common.close(conn);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 
