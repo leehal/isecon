@@ -14,4 +14,5 @@ public class MusicVo {
     private String mname;
     private String singer;
     private String surl;
+
 }
