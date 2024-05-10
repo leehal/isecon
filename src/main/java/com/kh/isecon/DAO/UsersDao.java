@@ -11,11 +11,12 @@ import java.sql.Statement;
 public class UsersDao {
     Connection conn = null;
     Statement stmt = null;
-    PreparedStatement pstmt = null;
     ResultSet rs = null;
+    PreparedStatement pstmt = null;
 
 
     public UsersVo userInfo(int uno){
+        // 유저 정보 가져오기
         UsersVo vo = new UsersVo();
         try {
             String query = "SELECT * FROM USERS WHERE UNO ="+uno;
@@ -23,22 +24,144 @@ public class UsersDao {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
 
-            uno = rs.getInt("UNO");
-            String id = rs.getString("ID");
-            String phone = rs.getString("PHONE");
-            String address = rs.getString("ADDRESS");
-            char admin = rs.getString("ADMIN").charAt(1);
-            String nickname = rs.getString("nickname");
+            if(rs.next()) {
+                uno = rs.getInt("UNO");
+                String id = rs.getString("ID");
+                String pwd = rs.getString("PWD");
+                String phone = rs.getString("PHONE");
+                String address = rs.getString("ADDRESS");
+                char admin = rs.getString("ADMIN").charAt(1);
+                String nickname = rs.getString("NICKNAME");
 
-            vo = new UsersVo(uno,id,phone,address,admin,nickname);
-
-            Common.close(rs);
-            Common.close(stmt);
-            Common.close(conn);
+                vo = new UsersVo(uno,id,pwd,phone,address,admin,nickname);
+            }
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
+
         return vo;
     }
+
+    public void UserUpDate(UsersVo vo) {
+        // 유저 정보 수정
+        try {
+            String query = "UPDATE USERS SET ID=?, PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno="+ vo.getUno();
+
+
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, vo.getId());
+            pstmt.setString(2, vo.getPwd());
+            pstmt.setString(3, vo.getPhone());
+            pstmt.setString(4, vo.getAddress());
+            pstmt.setString(5, vo.getNickname());
+            pstmt.executeUpdate();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pstmt);
+        Common.close(conn);
+    }
+
+    public void UsersDelete(int uno){
+        // 유저 회원 탈퇴
+        try {
+            String query = "delete from users where uno ="+uno;
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
+    }
+    public boolean LoginCheck(String id, String password){
+        // 로그인
+        try {
+            String query = "SELECT * FROM USERS WHERE ID ='"+ id +"' and pwd ='"+password+"'";
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+            if(rs.next()) {
+                return true;
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
+
+        return false;
+   }
+   public void UsersInsert(UsersVo vo){
+        // 회원가입
+        try {
+            String query = "INSERT INTO USERS (UNO,ID,PWD,PHONE,ADDRESS,ADMIN,NICKNAME) VALUE(uno_seq.nextVal,?,?,?,?,0,?)";
+
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, vo.getId());
+            pstmt.setString(2, vo.getPwd());
+            pstmt.setString(3, vo.getPhone());
+            pstmt.setString(4, vo.getAddress());
+            pstmt.setString(5, vo.getNickname());
+            pstmt.executeUpdate();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+       Common.close(pstmt);
+       Common.close(conn);
+   }
+   public boolean idSearch(String id, String name){
+        // 비밀번호를 찾기 위한 아이디/이름 확인
+        try {
+            String query = "SELECT * FROM USERS WHERE ID ='"+id+"'and name='"+name+"'";
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+            if(rs.next()){
+                return true;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+       Common.close(rs);
+       Common.close(stmt);
+       Common.close(conn);
+
+        return false;
+   }
+
+   public void changePwd(UsersVo vo){
+        // 비밀번호 재설정
+       try {
+           String query = "UPDATE USERS SET (PWD)='"+vo.getPwd()+"'where uno="+vo.getUno();
+           conn = Common.getConnection();
+           stmt = conn.createStatement();
+           rs = stmt.executeQuery(query);
+
+       }catch (Exception e) {
+           e.printStackTrace();
+       }
+       Common.close(rs);
+       Common.close(stmt);
+       Common.close(conn);
+   }
 }

@@ -13,5 +13,4 @@ public class SaleVo {
     private int sno;
     private int uno;
     private int pno;
-
 }

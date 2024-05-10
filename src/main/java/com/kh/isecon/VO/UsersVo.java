@@ -12,6 +12,7 @@ import lombok.Setter;
 public class UsersVo {
     private int uno;
     private String id;
+    private String pwd;
     private String phone;
     private String address;
     private char admin;
