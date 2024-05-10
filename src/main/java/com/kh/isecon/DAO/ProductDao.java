@@ -43,22 +43,23 @@ public class ProductDao {
         return list;
     }
 
-    public ProductVo productDetail (int pno){ // 해당 굿즈의 상세 페이지를 보여주기
-    ProductVo vo = new ProductVo();
+    public List<ProductVo> productdetail(String pname){ // 해당 굿즈의 상세 페이지를 보여주기
+    List<ProductVo> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELELTE * FROM PRODUCT WHERE PNO =" + pno;
+            String query = "SELELTE * FROM PRODUCT WHERE PNAME =" + pname;
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
-                pno = rs.getInt("PNO");
-                String pname = rs.getString("PNAME");
+                int pno = rs.getInt("PNO");
+                pname = rs.getString("PNAME");
                 int price = rs.getInt("PRICE");
                 String option = rs.getString("OPTIONS");
                 String pimg = rs.getString("PIMG");
 
-                vo = new ProductVo(pno, pname, price, option, pimg);
+                ProductVo vo = new ProductVo(pno, pname, price, option, pimg);
+                list.add(vo);
             }
             Common.close(rs);
             Common.close(stmt);
@@ -68,7 +69,7 @@ public class ProductDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return vo;
+        return list;
     }
 
 }
