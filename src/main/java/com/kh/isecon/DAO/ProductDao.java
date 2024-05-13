@@ -71,5 +71,32 @@ public class ProductDao {
         }
         return list;
     }
+    public ProductVo ProductSelect(int pno){
+        ProductVo vo = new ProductVo();
+        try{
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "SELELTE * FROM PRODUCT WHERE PNO =" + pno;
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                pno = rs.getInt("PNO");
+                String pname = rs.getString("PNAME");
+                int price = rs.getInt("PRICE");
+                String option = rs.getString("OPTION");
+                String pimg = rs.getString("PIMG");
+
+                vo = new ProductVo(pno, pname,price, option, pimg);
+
+            }
+            Common.close(rs);
+            Common.close(stmt);
+            Common.close(conn);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vo;
+    }
 
 }
