@@ -28,8 +28,9 @@ public class CartController {
         CartDao dao = new CartDao();
         return ResponseEntity.ok(dao.cartDelete(cno));
     }
-//    @PostMapping("/allcart") // 결제 시 장바구니 삭제
-//    public ResponseEntity<List<CartVo>> cartDeleteSale(@RequestParam("cartdeletesalecno")int cno, @RequestParam("cartdeleteslaeuno") int uno) {
-//
-//    }
+    @PostMapping("/allcart/{uno}") // 결제 시 장바구니 삭제
+    public ResponseEntity<Boolean> cartDeleteSale(@RequestBody List<Integer> cnoList, @PathVariable int uno) {
+        CartDao dao = new CartDao();
+        return ResponseEntity.ok(dao.saleDeleteCart(cnoList, uno));
+    }
 }

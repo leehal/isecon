@@ -23,6 +23,7 @@ public class CartDao {
             stmt = conn.createStatement();
             String query = "INSERT INTO CART (CNO, UNO, PNO) VALUES (CNO_SEQ.NEXTVAL ," + uno + "," + pno + ")";
             rs = stmt.executeQuery(query);
+
             if (rs.next()) isTrue= true;
 
         } catch (Exception e) {
@@ -84,24 +85,32 @@ public class CartDao {
         }
         return list;
     }
-    public void saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
+    public Boolean saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
+        boolean isTrue = false;
         try {
             for (int i : arrayCno) {
-                String query = "DELETE FROM CART" +
-                        "WHERE = CNO" + i + " AND UNO = " + uno ;
+                String query = "DELETE FROM CART " +
+                        "WHERE CNO=" + i + " AND UNO = " + uno ;
 
                 conn = Common.getConnection();
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);
 
-                Common.close(rs);
-                Common.close(stmt);
-                Common.close(conn);
+                if (rs.next()) isTrue= true;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
+
+
         }
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
+
+        return isTrue;
     }
+
 
     public int cartReturnPno(int cno) { // 장바구니에서 pno 가져오기
         int pno = 0;
