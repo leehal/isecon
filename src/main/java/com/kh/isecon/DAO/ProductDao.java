@@ -76,14 +76,14 @@ public class ProductDao {
         try{
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELELTE * FROM PRODUCT WHERE PNO =" + pno;
+            String query = "SELECT * FROM PRODUCT WHERE PNO =" + pno;
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 pno = rs.getInt("PNO");
                 String pname = rs.getString("PNAME");
                 int price = rs.getInt("PRICE");
-                String option = rs.getString("OPTION");
+                String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
 
                 vo = new ProductVo(pno, pname,price, option, pimg);

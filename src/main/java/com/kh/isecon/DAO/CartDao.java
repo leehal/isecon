@@ -16,14 +16,31 @@ public class CartDao {
     Statement stmt = null;
     ResultSet rs = null;
 
-    public Boolean cartInsert(int pno, int uno) {
+    public Boolean cartInsert(int pno, int uno) { // 굿즈페이지에서 장바구니에 넣기
         boolean isTrue=false;
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
             String query = "INSERT INTO CART (CNO, UNO, PNO) VALUES (CNO_SEQ.NEXTVAL ," + uno + "," + pno + ")";
             rs = stmt.executeQuery(query);
+            if (rs.next()) isTrue= true;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
+
+        return isTrue;
+    }
+    public Boolean cartDelete(int cno) { // 장바구니 삭제
+        boolean isTrue=false;
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "DELETE FROM CART WHERE CNO=" + cno;
+            rs = stmt.executeQuery(query);
 
             if (rs.next()) isTrue= true;
 
@@ -36,23 +53,9 @@ public class CartDao {
 
         return isTrue;
     }
-    public void cartDelete(int cno) {
 
-        try {
-            conn = Common.getConnection();
-            stmt = conn.createStatement();
-            String query = "DELETE FROM CART WHERE CNO=" + cno;
-            rs = stmt.executeQuery(query);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Common.close(rs);
-        Common.close(stmt);
-        Common.close(conn);
-    }
-
-    public List<ProductVo> cartSelect(int uno) {
+    public List<ProductVo> cartSelect(int uno) { // 장바구니 보기
         List<ProductVo> list = new ArrayList<>();
 
         try {
@@ -79,10 +82,9 @@ public class CartDao {
             e.printStackTrace();
 
         }
-
         return list;
     }
-    public void saleDeleteCart(List<Integer> arrayCno, int uno) {
+    public void saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
         try {
             for (int i : arrayCno) {
                 String query = "DELETE FROM CART" +
@@ -101,7 +103,7 @@ public class CartDao {
         }
     }
 
-    public int cartReturnPno(int cno) {
+    public int cartReturnPno(int cno) { // 장바구니에서 pno 가져오기
         int pno = 0;
 
         try {
