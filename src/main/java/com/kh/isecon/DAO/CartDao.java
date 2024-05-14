@@ -16,7 +16,7 @@ public class CartDao {
     Statement stmt = null;
     ResultSet rs = null;
 
-    public Boolean cartInsert(int pno, int uno) { // 굿즈페이지에서 장바구니에 넣기
+    public boolean cartInsert(int pno, int uno) { // 굿즈페이지에서 장바구니에 넣기
         boolean isTrue=false;
         try {
             conn = Common.getConnection();
@@ -35,7 +35,7 @@ public class CartDao {
 
         return isTrue;
     }
-    public Boolean cartDelete(int cno) { // 장바구니 삭제
+    public boolean cartDelete(int cno) { // 장바구니 삭제
         boolean isTrue=false;
         try {
             conn = Common.getConnection();
@@ -85,7 +85,7 @@ public class CartDao {
         }
         return list;
     }
-    public Boolean saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
+    public boolean saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
         boolean isTrue = false;
         try {
             for (int i : arrayCno) {

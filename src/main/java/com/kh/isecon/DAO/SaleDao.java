@@ -50,8 +50,9 @@ public class SaleDao {
 
 
 
-    public void inputSaleView(List<Integer> arrayPno, int uno) {
+    public boolean inputSaleView(List<Integer> arrayPno, int uno) {
         // 결제 내역 내용 삽입
+        boolean isTrue = false;
      try {
          for (int i : arrayPno) {
              String query = "INSERT INTO SALE (SNO, UNO, PNO) VALUES (SNO_SEQ.NEXTVAL," + uno + "," + i + ")";
@@ -59,13 +60,17 @@ public class SaleDao {
              conn = Common.getConnection();
              stmt = conn.createStatement();
              rs = stmt.executeQuery(query);
+
+             if (rs.next()) isTrue = true;
          }
-        // CartReturnPno
+
      }catch (Exception e){
          e.printStackTrace();
      }
         Common.close(rs);
         Common.close(stmt);
         Common.close(conn);
+
+        return isTrue;
     }
 }
