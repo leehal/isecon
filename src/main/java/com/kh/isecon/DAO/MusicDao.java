@@ -31,6 +31,7 @@ public class MusicDao {
                 String surl = rs.getString("surl");
 
                 MusicVo vo = new MusicVo(mno, mname, singer, surl);
+                System.out.println(vo.getMno());
                 list.add(vo);
             }
             Common.close(rs);
