@@ -1,5 +1,6 @@
 package com.kh.isecon.CONTROLLER;
 
+import com.kh.isecon.DAO.CartDao;
 import com.kh.isecon.DAO.ProductDao;
 import com.kh.isecon.VO.ProductVo;
 import lombok.Getter;
@@ -27,5 +28,9 @@ public class ProductController {
         ProductDao dao = new ProductDao();
         return ResponseEntity.ok(dao.productdetail(pname));
     }
-
+    @PostMapping("/goodsdetail")
+    public ResponseEntity<Boolean> goodsInsertCart(@RequestParam("insertcartpno")int pno, @RequestParam("insertcartuno") int uno) {
+        CartDao dao = new CartDao();
+        return ResponseEntity.ok(dao.cartInsert(pno, uno));
+    }
 }

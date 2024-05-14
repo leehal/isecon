@@ -16,13 +16,16 @@ public class CartDao {
     Statement stmt = null;
     ResultSet rs = null;
 
-    public void cartInsert(int pno, int uno) {
-
+    public Boolean cartInsert(int pno, int uno) {
+        boolean isTrue=false;
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "INSERT INTO CART (CNO, UNO, PNO) VALUES (CNO_SEQ.NEXTVAL," + uno + pno + ")";
+            String query = "INSERT INTO CART (CNO, UNO, PNO) VALUES (CNO_SEQ.NEXTVAL ," + uno + "," + pno + ")";
             rs = stmt.executeQuery(query);
+
+
+            if (rs.next()) isTrue= true;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,8 +33,9 @@ public class CartDao {
         Common.close(rs);
         Common.close(stmt);
         Common.close(conn);
-    }
 
+        return isTrue;
+    }
     public void cartDelete(int cno) {
 
         try {
