@@ -13,7 +13,6 @@ import java.util.List;
 public class MusicDao {
     Connection conn = null;
     Statement stmt = null;
-
     PreparedStatement pstmt = null;
     ResultSet rs = null;
 
@@ -99,11 +98,12 @@ public class MusicDao {
 
     public List<MusicVo> playListMusicSelect(String pname){
 
-        String sql = "SELECT *  FROM playlist where pname = "+ pname;
+        String sql = "SELECT * FROM playlist WHERE pname = ?";
         List<MusicVo> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, pname); // pname을 문자열로 처리
             rs = pstmt.executeQuery();
             while (rs.next()) {
                int mno = rs.getInt("mno");
@@ -115,6 +115,26 @@ public class MusicDao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void musicInsert(MusicVo vo){ // 초반에 DB에 음악 집어넣으려고 만듦
+        String sql = "insert into music" +
+                "(mno, mname, singer, surl)" +
+                "values (mno_seq.nextval, ?, ?, ?)";
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+                pstmt.setString(1,vo.getMname());
+                pstmt.setString(2,vo.getSinger());
+                pstmt.setString(3,vo.getSurl());
+                pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

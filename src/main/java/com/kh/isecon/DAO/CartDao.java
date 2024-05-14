@@ -48,26 +48,27 @@ public class CartDao {
         Common.close(conn);
     }
 
-    public List<CartVo> CartSelect() {
-        List<CartVo> list = new ArrayList<>();
+    public List<ProductVo> CartSelect(int uno) {
+        List<ProductVo> list = new ArrayList<>();
 
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELECT * FROM CART";
+            String query = "SELECT * FROM CART where uno ="+uno;
             rs = stmt.executeQuery(query);
 
             CartVo vo = new CartVo();
 
             while (rs.next()) {
                 int cno = rs.getInt("CNO");
-                int uno = rs.getInt("UNO");
                 int pno = rs.getInt("PNO");
 
-                vo.setCno(cno);
-                vo.setUno(uno);
-                vo.setPno(pno);
-                list.add(vo);
+                ProductDao dao = new ProductDao();
+
+                ProductVo pvo = dao.ProductSelect(pno); // pno로 where문 돌려 나온 product 테이블의 값을 ProductVo 타입으로 리턴
+                pvo.setPno(cno);
+
+                list.add(pvo);
             }
 
         } catch (Exception e) {
@@ -104,6 +105,7 @@ public class CartDao {
             rs = stmt.executeQuery(query);
 
             pno = rs.getInt("PNO");
+
 
 
         } catch (Exception e) {
