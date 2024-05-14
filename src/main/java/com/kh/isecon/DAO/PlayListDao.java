@@ -20,7 +20,7 @@ public class PlayListDao {
     public List<PlayListVo> usersPlayListNameSelect(int uno) {
         List<PlayListVo> list = new ArrayList<>();
         try {
-            String sql = "select plno plnmme from PLAYLIST where uno = ?";
+            String sql = "select distinct plname from PLAYLIST where uno = ?";
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, uno);
@@ -28,9 +28,9 @@ public class PlayListDao {
             while (rs.next()) {
                 PlayListVo vo = new PlayListVo();
                 String plname = rs.getString("plname");
-                int plno = rs.getInt("plno");
+//                int plno = rs.getInt("plno");
 
-                vo.setPlno(plno);
+//                vo.setPlno(plno);
                 vo.setPlname(plname);
                 list.add(vo);
             }

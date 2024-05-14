@@ -97,14 +97,15 @@ public class MusicDao {
         }
     }
 
-    public List<MusicVo> playListMusicSelect(String pname){
+    public List<MusicVo> playListMusicSelect(String pname, int uno){
 
-        String sql = "SELECT * FROM playlist WHERE pname = ?";
+        String sql = "SELECT * FROM playlist WHERE plname = ? and uno =?";
         List<MusicVo> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, pname); // pname을 문자열로 처리
+            pstmt.setInt(2, uno); // pname을 문자열로 처리
             rs = pstmt.executeQuery();
             while (rs.next()) {
                int mno = rs.getInt("mno");
