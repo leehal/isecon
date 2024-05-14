@@ -13,10 +13,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/isecon/users")
 @RequiredArgsConstructor
 public class UsersController {
-    @GetMapping("/userinfo") // 유저 정보 보여주기
-    public ResponseEntity<UsersVo> userSelect(@RequestParam ("uno") int uno){
+    @GetMapping("/userinfo") // 마이페이지
+    public ResponseEntity<UsersVo> userSelect(@RequestParam("uno") int uno) {
         UsersDao dao = new UsersDao();
         return ResponseEntity.ok(dao.userInfo(uno));
     }
-    
+
+    @PostMapping("/userSignup") // 회원가입 정보 저장
+    public ResponseEntity<Boolean> signupInsert(@RequestBody UsersVo member) {
+        UsersDao dao = new UsersDao();
+        boolean isTrue = dao.UsersInsert(member);
+        return ResponseEntity.ok(isTrue);
+    }
+    @DeleteMapping("/userDelete/{uno}") // 회원삭제
+    public ResponseEntity<Boolean> userDelete(@PathVariable int uno) {
+        UsersDao dao = new UsersDao();
+        boolean isDeleted = dao.UsersDelete(uno);
+        return ResponseEntity.ok(isDeleted);
+    }
 }

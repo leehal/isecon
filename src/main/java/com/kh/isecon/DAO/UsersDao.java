@@ -68,21 +68,26 @@ public class UsersDao {
         Common.close(conn);
     }
 
-    public void UsersDelete(int uno){
+    public boolean UsersDelete(int uno) {
         // 유저 회원 탈퇴
+        boolean isTrue = false;
         try {
-            String query = "delete from users where uno ="+uno;
+            System.out.println("함수진입");
+            String query = "DELETE FROM users WHERE uno = ?";
             conn = Common.getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
-
-
-        }catch (Exception e) {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, uno);
+            int result = pstmt.executeUpdate();
+            if (result == 1) {
+                isTrue = true;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Common.close(rs);
-        Common.close(stmt);
-        Common.close(conn);
+            Common.close(pstmt);
+            Common.close(conn);
+
+        return isTrue;
     }
     public boolean LoginCheck(String id, String password){
         // 로그인
@@ -105,11 +110,13 @@ public class UsersDao {
 
         return false;
    }
-   public void UsersInsert(UsersVo vo){
+   public boolean UsersInsert(UsersVo vo){
         // 회원가입
+       boolean isTrue = false;
         try {
-            String query = "INSERT INTO USERS (UNO,ID,PWD,PHONE,ADDRESS,ADMIN,NICKNAME) VALUE(uno_seq.nextVal,?,?,?,?,0,?)";
+            String query = "INSERT INTO USERS (UNO,ID,PWD,PHONE,ADDRESS,ADMIN,NICKNAME) VALUES(uno_seq.nextVal,?,?,?,?,0,?)";
 
+            System.out.println("함수진입");
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getId());
@@ -117,7 +124,10 @@ public class UsersDao {
             pstmt.setString(3, vo.getPhone());
             pstmt.setString(4, vo.getAddress());
             pstmt.setString(5, vo.getNickname());
-            pstmt.executeUpdate();
+            int result = pstmt.executeUpdate();
+            if (result==1){
+                isTrue = true;
+            }
 
 
         }catch (Exception e){
@@ -125,6 +135,7 @@ public class UsersDao {
         }
        Common.close(pstmt);
        Common.close(conn);
+       return isTrue;
    }
    public boolean idSearch(String id, String name){
         // 비밀번호를 찾기 위한 아이디/이름 확인
