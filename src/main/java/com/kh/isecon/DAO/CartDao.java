@@ -65,7 +65,7 @@ public class CartDao {
 
                 ProductDao dao = new ProductDao();
 
-                ProductVo pvo = dao.ProductSelect(pno); // pno로 where문 돌려 나온 product 테이블의 값을 ProductVo 타입으로 리턴
+                ProductVo pvo = dao.productSelect(pno); // pno로 where문 돌려 나온 product 테이블의 값을 ProductVo 타입으로 리턴
                 pvo.setPno(cno);
 
                 list.add(pvo);
@@ -73,7 +73,9 @@ public class CartDao {
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
+
         return list;
     }
     public void saleDeleteCart(List<Integer> arrayCno, int uno) {

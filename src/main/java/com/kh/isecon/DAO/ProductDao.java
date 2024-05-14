@@ -71,7 +71,7 @@ public class ProductDao {
         }
         return list;
     }
-    public ProductVo ProductSelect(int pno){
+    public ProductVo productSelect(int pno){
         ProductVo vo = new ProductVo();
         try{
             conn = Common.getConnection();
