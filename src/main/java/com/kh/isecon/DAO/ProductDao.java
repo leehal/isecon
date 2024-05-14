@@ -27,7 +27,7 @@ public class ProductDao {
                 int pno = rs.getInt("PNO");
                 String pname = rs.getString("PNAME");
                 int price = rs.getInt("PRICE");
-                String option = rs.getString("OPTION");
+                String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
 
                 ProductVo vo = new ProductVo(pno, pname, price, option, pimg);
@@ -48,14 +48,14 @@ public class ProductDao {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELELTE * FROM PRODUCT WHERE PNAME =" + pname;
+            String query = "SELECT * FROM PRODUCT WHERE PNAME =" +"'"+ pname+"'";
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
                 int pno = rs.getInt("PNO");
                 pname = rs.getString("PNAME");
                 int price = rs.getInt("PRICE");
-                String option = rs.getString("OPTIONS");
+                String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
 
                 ProductVo vo = new ProductVo(pno, pname, price, option, pimg);

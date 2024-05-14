@@ -48,7 +48,7 @@ public class CartDao {
         Common.close(conn);
     }
 
-    public List<ProductVo> CartSelect(int uno) {
+    public List<ProductVo> cartSelect(int uno) {
         List<ProductVo> list = new ArrayList<>();
 
         try {
@@ -97,7 +97,7 @@ public class CartDao {
         }
     }
 
-    public int CartReturnPno(int cno) {
+    public int cartReturnPno(int cno) {
         int pno = 0;
 
         try {
