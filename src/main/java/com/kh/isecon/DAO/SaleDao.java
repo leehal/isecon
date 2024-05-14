@@ -1,6 +1,7 @@
 package com.kh.isecon.DAO;
 
 import com.kh.isecon.COMMON.Common;
+import com.kh.isecon.VO.CartVo;
 import com.kh.isecon.VO.ProductVo;
 import com.kh.isecon.VO.SaleVo;
 import com.kh.isecon.VO.UsersVo;
@@ -32,7 +33,6 @@ public class SaleDao {
                 int pno = rs.getInt("PNO");
 
                 ProductDao dao = new ProductDao();
-
                 ProductVo pvo = dao.productSelect(pno);
                 list.add(pvo);
             }
@@ -50,14 +50,22 @@ public class SaleDao {
 
 
 
-    public ProductVo inputSaleView() {
+    public void inputSaleView(List<Integer> arrayPno, int uno) {
         // 결제 내역 내용 삽입
      try {
+         for (int i : arrayPno) {
+             String query = "INSERT INTO SALE (SNO, UNO, PNO) VALUES (SNO_SEQ.NEXTVAL," + uno + "," + i + ")";
 
+             conn = Common.getConnection();
+             stmt = conn.createStatement();
+             rs = stmt.executeQuery(query);
+         }
         // CartReturnPno
      }catch (Exception e){
          e.printStackTrace();
      }
-     return ;
+        Common.close(rs);
+        Common.close(stmt);
+        Common.close(conn);
     }
 }
