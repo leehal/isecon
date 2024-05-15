@@ -1,4 +1,4 @@
-package com.kh.isecon.VO;
+package com.kh.isecon.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

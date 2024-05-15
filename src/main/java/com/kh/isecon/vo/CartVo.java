@@ -1,4 +1,6 @@
-package com.kh.isecon.VO;
+
+package com.kh.isecon.vo;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +11,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaleVo {
-    private int sno;
+
+public class CartVo {
+    private int cno;
     private int uno;
     private int pno;
 }

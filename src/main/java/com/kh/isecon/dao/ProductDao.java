@@ -1,10 +1,9 @@
-package com.kh.isecon.DAO;
+package com.kh.isecon.dao;
 
-import com.kh.isecon.COMMON.Common;
-import com.kh.isecon.VO.ProductVo;
+import com.kh.isecon.common.Common;
+import com.kh.isecon.vo.ProductVo;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;

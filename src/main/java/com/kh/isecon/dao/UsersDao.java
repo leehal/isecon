@@ -1,7 +1,7 @@
-package com.kh.isecon.DAO;
+package com.kh.isecon.dao;
 
-import com.kh.isecon.COMMON.Common;
-import com.kh.isecon.VO.UsersVo;
+import com.kh.isecon.common.Common;
+import com.kh.isecon.vo.UsersVo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

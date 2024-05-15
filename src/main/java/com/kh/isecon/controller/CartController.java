@@ -1,18 +1,13 @@
-package com.kh.isecon.CONTROLLER;
-import com.kh.isecon.DAO.CartDao;
-import com.kh.isecon.DAO.ProductDao;
-import com.kh.isecon.DAO.SaleDao;
-import com.kh.isecon.VO.CartVo;
-import com.kh.isecon.VO.ProductVo;
-import lombok.Getter;
+package com.kh.isecon.controller;
+import com.kh.isecon.dao.CartDao;
+import com.kh.isecon.dao.SaleDao;
+import com.kh.isecon.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @CrossOrigin(origins = "http://localhost:3000")

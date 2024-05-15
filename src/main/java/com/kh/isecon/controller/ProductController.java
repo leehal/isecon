@@ -1,9 +1,8 @@
-package com.kh.isecon.CONTROLLER;
+package com.kh.isecon.controller;
 
-import com.kh.isecon.DAO.CartDao;
-import com.kh.isecon.DAO.ProductDao;
-import com.kh.isecon.VO.ProductVo;
-import lombok.Getter;
+import com.kh.isecon.dao.CartDao;
+import com.kh.isecon.dao.ProductDao;
+import com.kh.isecon.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

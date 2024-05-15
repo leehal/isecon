@@ -1,4 +1,4 @@
-package com.kh.isecon.COMMON;
+package com.kh.isecon.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

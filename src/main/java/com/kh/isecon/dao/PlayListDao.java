@@ -1,8 +1,7 @@
-package com.kh.isecon.DAO;
+package com.kh.isecon.dao;
 
-import com.kh.isecon.COMMON.Common;
-import com.kh.isecon.VO.MusicVo;
-import com.kh.isecon.VO.PlayListVo;
+import com.kh.isecon.common.Common;
+import com.kh.isecon.vo.PlayListVo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

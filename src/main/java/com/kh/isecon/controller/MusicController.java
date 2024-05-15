@@ -1,15 +1,14 @@
-package com.kh.isecon.CONTROLLER;
+package com.kh.isecon.controller;
 
-import com.kh.isecon.DAO.MusicDao;
-import com.kh.isecon.DAO.PlayListDao;
-import com.kh.isecon.VO.MusicVo;
-import com.kh.isecon.VO.PlayListVo;
+import com.kh.isecon.dao.MusicDao;
+import com.kh.isecon.dao.PlayListDao;
+import com.kh.isecon.vo.MusicVo;
+import com.kh.isecon.vo.PlayListVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j

@@ -1,7 +1,7 @@
-package com.kh.isecon.CONTROLLER;
+package com.kh.isecon.controller;
 
-import com.kh.isecon.DAO.UsersDao;
-import com.kh.isecon.VO.UsersVo;
+import com.kh.isecon.dao.UsersDao;
+import com.kh.isecon.vo.UsersVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

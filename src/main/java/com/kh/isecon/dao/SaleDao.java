@@ -1,10 +1,7 @@
-package com.kh.isecon.DAO;
+package com.kh.isecon.dao;
 
-import com.kh.isecon.COMMON.Common;
-import com.kh.isecon.VO.CartVo;
-import com.kh.isecon.VO.ProductVo;
-import com.kh.isecon.VO.SaleVo;
-import com.kh.isecon.VO.UsersVo;
+import com.kh.isecon.common.Common;
+import com.kh.isecon.vo.ProductVo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
