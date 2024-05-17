@@ -90,7 +90,8 @@ public class UsersDao {
 
         return isTrue;
     }
-    public boolean LoginCheck(UsersVo vo){
+    public int LoginCheck(UsersVo vo){
+        int uno=0;
         // 로그인
         try {
             String query = "SELECT * FROM USERS WHERE ID ='"+ vo.getId() +"' and pwd ='"+vo.getPwd()+"'";
@@ -99,7 +100,7 @@ public class UsersDao {
             rs = stmt.executeQuery(query);
 
             if(rs.next()) {
-                return true;
+               uno= rs.getInt("uno");
             }
 
         }catch (Exception e) {
@@ -109,7 +110,7 @@ public class UsersDao {
         Common.close(stmt);
         Common.close(conn);
 
-        return false;
+        return uno;
    }
    public boolean UsersInsert(UsersVo vo){
         // 회원가입

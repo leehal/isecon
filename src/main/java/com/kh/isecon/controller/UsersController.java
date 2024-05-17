@@ -20,9 +20,9 @@ public class UsersController {
     }
 
     @PostMapping("/userSignup") // 회원가입 정보 저장
-    public ResponseEntity<Boolean> signupInsert(@RequestBody UsersVo member) {
+    public ResponseEntity<Boolean> signupInsert(@RequestBody UsersVo vo) {
         UsersDao dao = new UsersDao();
-        boolean isTrue = dao.UsersInsert(member);
+        boolean isTrue = dao.UsersInsert(vo);
         return ResponseEntity.ok(isTrue);
     }
     @DeleteMapping("/userDelete/{uno}") // 회원삭제
@@ -38,9 +38,9 @@ public class UsersController {
         return ResponseEntity.ok(isUpDate);
     }
     @PostMapping("/userLogin") // 로그인
-    public ResponseEntity<Boolean> loginCheck(@RequestBody UsersVo vo) {
+    public ResponseEntity<Integer> loginCheck(@RequestBody UsersVo vo) {
         UsersDao dao = new UsersDao();
-        boolean isLog = dao.LoginCheck(vo);
+        int isLog = dao.LoginCheck(vo);
         return ResponseEntity.ok(isLog);
     }
 }
