@@ -90,10 +90,10 @@ public class UsersDao {
 
         return isTrue;
     }
-    public boolean LoginCheck(String id, String password){
+    public boolean LoginCheck(UsersVo vo){
         // 로그인
         try {
-            String query = "SELECT * FROM USERS WHERE ID ='"+ id +"' and pwd ='"+password+"'";
+            String query = "SELECT * FROM USERS WHERE ID ='"+ vo.getId() +"' and pwd ='"+vo.getPwd()+"'";
             conn = Common.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);

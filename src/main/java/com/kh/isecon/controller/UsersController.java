@@ -37,4 +37,10 @@ public class UsersController {
         boolean isUpDate = dao.UserUpDate(vo);
         return ResponseEntity.ok(isUpDate);
     }
+    @PostMapping("/userLogin") // 로그인
+    public ResponseEntity<Boolean> loginCheck(@RequestBody UsersVo vo) {
+        UsersDao dao = new UsersDao();
+        boolean isLog = dao.LoginCheck(vo);
+        return ResponseEntity.ok(isLog);
+    }
 }
