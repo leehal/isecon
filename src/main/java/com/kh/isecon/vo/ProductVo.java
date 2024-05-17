@@ -17,4 +17,5 @@ public class ProductVo {
     private int price;
     private String option;
     private String pimg;
+    private String pdimg;
 }

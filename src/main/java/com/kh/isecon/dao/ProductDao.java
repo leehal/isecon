@@ -28,8 +28,9 @@ public class ProductDao {
                 int price = rs.getInt("PRICE");
                 String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
+                String pdimg = rs.getString("PDIMG");
 
-                ProductVo vo = new ProductVo(pno, pname, price, option, pimg);
+                ProductVo vo = new ProductVo(pno, pname, price, option, pimg, pdimg);
                 list.add(vo);
             }
             Common.close(rs);
@@ -56,8 +57,9 @@ public class ProductDao {
                 int price = rs.getInt("PRICE");
                 String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
+                String pdimg = rs.getString("PDIMG");
 
-                ProductVo vo = new ProductVo(pno, pname, price, option, pimg);
+                ProductVo vo = new ProductVo(pno, pname, price, option, pimg, pdimg);
                 list.add(vo);
             }
             Common.close(rs);
@@ -84,8 +86,9 @@ public class ProductDao {
                 int price = rs.getInt("PRICE");
                 String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
+                String pdimg = rs.getString("PDIMG");
 
-                vo = new ProductVo(pno, pname,price, option, pimg);
+                vo = new ProductVo(pno, pname,price, option, pimg, pdimg);
 
             }
             Common.close(rs);
