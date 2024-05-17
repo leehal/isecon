@@ -1,4 +1,4 @@
-package com.kh.isecon.controller;
+package com.kh.isecon.CONTROLLER;
 
 import com.kh.isecon.dao.MusicDao;
 import com.kh.isecon.dao.PlayListDao;

@@ -31,4 +31,10 @@ public class UsersController {
         boolean isDeleted = dao.UsersDelete(uno);
         return ResponseEntity.ok(isDeleted);
     }
+    @PostMapping("/userupdate") // 사용자 정보 업데이트
+    public ResponseEntity<Boolean> userUpdate(@RequestBody UsersVo vo) {
+        UsersDao dao = new UsersDao();
+        boolean isUpDate = dao.UserUpDate(vo);
+        return ResponseEntity.ok(isUpDate);
+    }
 }

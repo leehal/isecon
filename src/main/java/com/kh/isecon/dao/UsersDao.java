@@ -30,7 +30,7 @@ public class UsersDao {
                 String pwd = rs.getString("PWD");
                 String phone = rs.getString("PHONE");
                 String address = rs.getString("ADDRESS");
-                char admin = rs.getString("ADMIN").charAt(1);
+                char admin = rs.getString("ADMIN").charAt(0);
                 String nickname = rs.getString("NICKNAME");
 
                 vo = new UsersVo(uno,id,pwd,phone,address,admin,nickname);
@@ -46,12 +46,10 @@ public class UsersDao {
         return vo;
     }
 
-    public void UserUpDate(UsersVo vo) {
+    public Boolean UserUpDate(UsersVo vo) {
         // 유저 정보 수정
         try {
-            String query = "UPDATE USERS SET ID=?, PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno="+ vo.getUno();
-
-
+            String query = "UPDATE USERS SET ID=?, PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno=?";
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getId());
@@ -59,13 +57,16 @@ public class UsersDao {
             pstmt.setString(3, vo.getPhone());
             pstmt.setString(4, vo.getAddress());
             pstmt.setString(5, vo.getNickname());
+            pstmt.setInt(6, vo.getUno());
             pstmt.executeUpdate();
-
-        }catch (Exception e) {
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        } finally {
+            Common.close(pstmt);
+            Common.close(conn);
         }
-        Common.close(pstmt);
-        Common.close(conn);
     }
 
     public boolean UsersDelete(int uno) {
