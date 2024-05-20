@@ -22,13 +22,13 @@ public class CartController {
         return ResponseEntity.ok(dao.cartSelect(uno));
     }
 
-    @PostMapping("/allcart") // 장바구니 삭제
-    public ResponseEntity<Boolean> cartDelete(@RequestParam("deletecartcno") int cno) {
+    @PostMapping("/deletecart/{cno}")// 장바구니 삭제
+    public ResponseEntity<Boolean> cartDelete(@RequestBody int cno) {
         CartDao dao = new CartDao();
         return ResponseEntity.ok(dao.cartDelete(cno));
     }
 
-    @PostMapping("/allcart/{uno}") // 결제 시 장바구니 삭제
+    @PostMapping("/cartdeletesale/{uno}") // 결제 시 장바구니 삭제
     public ResponseEntity<Boolean> cartDeleteSale(@RequestBody List<Integer> cnoList, @PathVariable int uno) {
         CartDao dao = new CartDao();
         SaleDao dao1 = new SaleDao();  // dao1 인스턴스 생성

@@ -88,12 +88,12 @@ public class CartDao {
     public boolean saleDeleteCart(List<Integer> arrayCno, int uno) { // 결제 시 장바구니 삭제 > 결제내역 넘김
         boolean isTrue = false;
         try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
             for (int i : arrayCno) {
                 String query = "DELETE FROM CART " +
                         "WHERE CNO=" + i + " AND UNO = " + uno ;
 
-                conn = Common.getConnection();
-                stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);
 
                 if (rs.next()) isTrue= true;
