@@ -1,7 +1,10 @@
 package com.kh.isecon.dao;
 
 import com.kh.isecon.common.Common;
+import com.kh.isecon.vo.CartVo;
 import com.kh.isecon.vo.ProductVo;
+import com.kh.isecon.vo.SaleVo;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,17 +22,21 @@ public class SaleDao {
         // 유저 결제 내역 조회
 
         try {
-            String query = "SELECT * FROM SALE WHERE UNO"+uno;
             conn = Common.getConnection();
             stmt = conn.createStatement();
+            String query = "SELECT * FROM SALE WHERE UNO ="+uno;
             rs = stmt.executeQuery(query);
+
 
             while (rs.next()) {
                 int sno = rs.getInt("SNO");
                 int pno = rs.getInt("PNO");
 
                 ProductDao dao = new ProductDao();
+
                 ProductVo pvo = dao.productSelect(pno);
+                pvo.setPno(sno);
+
                 list.add(pvo);
             }
 

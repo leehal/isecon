@@ -18,9 +18,9 @@ import java.util.List;
 @RequestMapping("/isecon/cart")
 @RequiredArgsConstructor
 
-public class CartController {
-    @GetMapping("/allcart") // 장바구니 보기
-    public ResponseEntity<List<ProductVo>> allCartSelect(@RequestParam("uno") int uno) {
+    public class CartController {
+        @GetMapping("/allcart") // 장바구니 보기
+        public ResponseEntity<List<ProductVo>> allCartSelect(@RequestParam("uno") int uno) {
         CartDao dao = new CartDao();
         return ResponseEntity.ok(dao.cartSelect(uno));
     }
