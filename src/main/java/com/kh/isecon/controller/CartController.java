@@ -1,6 +1,9 @@
 package com.kh.isecon.controller;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.isecon.dao.CartDao;
 import com.kh.isecon.dao.SaleDao;
+import com.kh.isecon.vo.CartDeleteSaleVo;
 import com.kh.isecon.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +31,14 @@ public class CartController {
         return ResponseEntity.ok(dao.cartDelete(cno));
     }
 
-    @PostMapping("/cartdeletesale/{uno}") // 결제 시 장바구니 삭제
-    public ResponseEntity<Boolean> cartDeleteSale(@RequestBody List<Integer> cnoList, @PathVariable int uno) {
+    @PostMapping("/cartdeletesale") // 결제 시 장바구니 삭제
+    public ResponseEntity<Boolean> cartDeleteSale(@RequestBody CartDeleteSaleVo vo) {
         CartDao dao = new CartDao();
         SaleDao dao1 = new SaleDao();  // dao1 인스턴스 생성
 
+        List<Integer> cnoList = vo.getCnoList();
+        int uno = vo.getUno();
+        System.out.println(vo.getCnoList());
         Boolean isTrue = false;
         boolean isCart = dao.saleDeleteCart(cnoList, uno);
         boolean isSale = dao1.inputSaleView(cnoList, uno);
