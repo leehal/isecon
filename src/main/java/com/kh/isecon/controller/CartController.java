@@ -23,7 +23,7 @@ public class CartController {
     }
 
     @PostMapping("/deletecart/{cno}")// 장바구니 삭제
-    public ResponseEntity<Boolean> cartDelete(@RequestBody int cno) {
+    public ResponseEntity<Boolean> cartDelete(@PathVariable int cno) {
         CartDao dao = new CartDao();
         return ResponseEntity.ok(dao.cartDelete(cno));
     }
