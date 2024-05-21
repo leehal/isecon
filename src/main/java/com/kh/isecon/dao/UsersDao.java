@@ -49,15 +49,14 @@ public class UsersDao {
     public Boolean UserUpDate(UsersVo vo) {
         // 유저 정보 수정
         try {
-            String query = "UPDATE USERS SET ID=?, PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno=?";
+            String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno=?";
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, vo.getId());
-            pstmt.setString(2, vo.getPwd());
-            pstmt.setString(3, vo.getPhone());
-            pstmt.setString(4, vo.getAddress());
-            pstmt.setString(5, vo.getNickname());
-            pstmt.setInt(6, vo.getUno());
+            pstmt.setString(1, vo.getPwd());
+            pstmt.setString(2, vo.getPhone());
+            pstmt.setString(3, vo.getAddress());
+            pstmt.setString(4, vo.getNickname());
+            pstmt.setInt(5, vo.getUno());
             pstmt.executeUpdate();
             return true;
         } catch (Exception e) {
