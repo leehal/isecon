@@ -69,4 +69,21 @@ public class SaleDao {
 
         return isTrue;
     }
+    public boolean productInsertSale(int pno, int uno) { // 상품 상세페이지 바로 구매
+        int ret = 0;
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "INSERT INTO SALE (SNO, UNO, PNO) VALUES (SNO_SEQ.NEXTVAL," + uno + "," + pno + ")";
+            ret = stmt.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Common.close(stmt);
+        Common.close(conn);
+
+        return ret>0;
+    }
 }

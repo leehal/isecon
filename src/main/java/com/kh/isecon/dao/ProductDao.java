@@ -72,7 +72,7 @@ public class ProductDao {
         }
         return list;
     }
-    public ProductVo productSelect(int pno){ //
+    public ProductVo productSelect(int pno){ // 장바구니에 상품(Product) 항목 간략하게 보여주기
         ProductVo vo = new ProductVo();
         try{
             conn = Common.getConnection();

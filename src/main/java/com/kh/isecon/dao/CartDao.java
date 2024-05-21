@@ -134,5 +134,22 @@ public class CartDao {
 
         return pno;
 }
+    public boolean cartInsertForProduct(int pno, int uno) { // 장바구니 넣기
+        int ret = 0;
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "INSERT INTO CART (CNO, UNO, PNO) VALUES (CNO_SEQ.NEXTVAL," + uno + "," + pno + ")";
+            ret = stmt.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Common.close(stmt);
+        Common.close(conn);
+
+        return ret>0;
+    }
 }
 
