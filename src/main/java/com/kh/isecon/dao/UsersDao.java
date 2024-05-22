@@ -115,6 +115,7 @@ public class UsersDao {
         // 회원가입
        boolean isTrue = false;
         try {
+
             String query = "INSERT INTO USERS (UNO,ID,PWD,PHONE,ADDRESS,ADMIN,NICKNAME) VALUES(uno_seq.nextVal,?,?,?,?,0,?)";
 
             System.out.println("함수진입");
