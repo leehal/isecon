@@ -45,7 +45,7 @@ public class PlayListDao {
     public boolean playListInsert(List<Integer> mnoList, int uno, String plname) {
         boolean isTrue = false;
         String sql = "insert into playlist" +
-                "(plno, uno, mno, planme)" +
+                "(plno, uno, mno, plname)" +
                 "values (plno_seq.nextval, ?, ?, ?)";
         try {
             conn = Common.getConnection();
