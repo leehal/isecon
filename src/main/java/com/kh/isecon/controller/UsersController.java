@@ -43,4 +43,9 @@ public class UsersController {
         int isLog = dao.LoginCheck(vo);
         return ResponseEntity.ok(isLog);
     }
+    @PostMapping("/checkDuplicate") // 중복확인
+    public ResponseEntity<Boolean> checkDuplicate(@RequestBody UsersVo vo) {
+        UsersDao dao = new UsersDao();
+        return ResponseEntity.ok(dao.checkUser(vo));
+    }
 }

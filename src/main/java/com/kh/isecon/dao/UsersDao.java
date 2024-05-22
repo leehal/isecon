@@ -32,8 +32,9 @@ public class UsersDao {
                 String address = rs.getString("ADDRESS");
                 char admin = rs.getString("ADMIN").charAt(0);
                 String nickname = rs.getString("NICKNAME");
+                String uimg = rs.getString("UIMG");
 
-                vo = new UsersVo(uno,id,pwd,phone,address,admin,nickname);
+                vo = new UsersVo(uno,id,pwd,phone,address,admin,nickname,uimg);
             }
 
         }catch (Exception e) {
@@ -49,7 +50,7 @@ public class UsersDao {
     public Boolean UserUpDate(UsersVo vo) {
         // 유저 정보 수정
         try {
-            String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=? WHERE uno=?";
+            String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=?, UMIG=? WHERE uno=?";
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getPwd());
@@ -57,6 +58,7 @@ public class UsersDao {
             pstmt.setString(3, vo.getAddress());
             pstmt.setString(4, vo.getNickname());
             pstmt.setInt(5, vo.getUno());
+            pstmt.setString(6, vo.getUimg());
             pstmt.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -131,7 +133,6 @@ public class UsersDao {
                 isTrue = true;
             }
 
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -177,4 +178,37 @@ public class UsersDao {
        Common.close(stmt);
        Common.close(conn);
    }
+
+    public boolean checkUser(UsersVo vo) {
+        boolean isDuplicate = true;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String queryId = "SELECT COUNT(*) FROM USERS WHERE ID = ?";
+
+            conn = Common.getConnection();
+
+            // ID 중복 확인
+            pstmt = conn.prepareStatement(queryId);
+            pstmt.setString(1, vo.getId());
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                if (count > 0) {
+                    isDuplicate = false; // ID가 중복됨
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Common.close(rs);
+            Common.close(pstmt);
+            Common.close(conn);
+        }
+
+        return isDuplicate;
+    }
 }

@@ -17,4 +17,5 @@ public class UsersVo {
     private String address;
     private char admin;
     private String nickname;
+    private String uimg;
 }
