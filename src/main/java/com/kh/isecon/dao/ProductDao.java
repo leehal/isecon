@@ -16,21 +16,22 @@ public class ProductDao {
 
     public List<ProductVo> productSelectList() { // 굿즈 페이지 상품 전체 보여주기
         List<ProductVo> list = new ArrayList<>();
+
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELECT * FROM PRODUCT";
+            String query = "SELECT DISTINCT PNAME, PRICE, PIMG FROM PRODUCT";
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
-                int pno = rs.getInt("PNO");
+                ProductVo vo = new ProductVo();
                 String pname = rs.getString("PNAME");
                 int price = rs.getInt("PRICE");
-                String option = rs.getString("OPN");
                 String pimg = rs.getString("PIMG");
-                String pdimg = rs.getString("PDIMG");
+                vo.setPname(pname);
+                vo.setPrice(price);
+                vo.setPimg(pimg);
 
-                ProductVo vo = new ProductVo(pno, pname, price, option, pimg, pdimg);
                 list.add(vo);
             }
             Common.close(rs);
