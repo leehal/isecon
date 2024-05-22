@@ -42,7 +42,8 @@ public class PlayListDao {
         return list;
     }
 
-    public void playListInsert(List<Integer> mnoList, int uno, String plname) {
+    public boolean playListInsert(List<Integer> mnoList, int uno, String plname) {
+        boolean isTrue = false;
         String sql = "insert into playlist" +
                 "(plno, uno, mno, planme)" +
                 "values (plno_seq.nextval, ?, ?, ?)";
@@ -55,11 +56,13 @@ public class PlayListDao {
                 pstmt.setString(3,plname);
                 pstmt.executeUpdate();
             }
+            isTrue = true;
             pstmt.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return isTrue;
     }
 
 //    Veiw단에서 기존이름을 저장해주고 바뀐이름과 원래의 이름 둘 다 저장해 보내줘야함. useState 2개 사용

@@ -2,6 +2,7 @@ package com.kh.isecon.controller;
 
 import com.kh.isecon.dao.MusicDao;
 import com.kh.isecon.dao.PlayListDao;
+import com.kh.isecon.vo.InsertPlayListVo;
 import com.kh.isecon.vo.MusicVo;
 import com.kh.isecon.vo.PlayListVo;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,14 @@ public class MusicController {
 //        띄워지게 하기 (useState 사용!)
         return ResponseEntity.ok(list);
     }
-
+    @PostMapping("insertpl")
+    public ResponseEntity<Boolean> playListInsert(@RequestBody InsertPlayListVo vo){
+        PlayListDao dao = new PlayListDao();
+        List<Integer> mnoList = vo.getMnoList();
+        int uno = vo.getUno();
+        String plname = vo.getPlname();
+        boolean isTrue = dao.playListInsert(mnoList,uno,plname);
+        return ResponseEntity.ok(isTrue);
+    }
 
 }
