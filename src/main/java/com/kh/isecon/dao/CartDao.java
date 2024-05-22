@@ -6,6 +6,7 @@ import com.kh.isecon.vo.ProductVo;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class CartDao {
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
+    PreparedStatement pstmt = null;
 
     public boolean cartInsert(int pno, int uno) { // 굿즈페이지에서 장바구니에 넣기
         boolean isTrue=false;
@@ -117,13 +119,13 @@ public class CartDao {
 
         try {
             conn = Common.getConnection();
-            stmt = conn.createStatement();
-            String query = "SELECT PNO FROM CART WHERE CNO = " + cno;
-            rs = stmt.executeQuery(query);
-
-            pno = rs.getInt("PNO");
-
-
+            String query = "SELECT PNO FROM CART WHERE CNO = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cno);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                pno = rs.getInt("PNO");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

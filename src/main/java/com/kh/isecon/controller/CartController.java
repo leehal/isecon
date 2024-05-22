@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -40,8 +41,14 @@ import java.util.List;
         int uno = vo.getUno();
         System.out.println(vo.getCnoList());
         Boolean isTrue = false;
+
+        List<Integer> pnoList = new ArrayList<>();
+        for (Integer i : cnoList) {
+            pnoList.add(dao.cartReturnPno(i));
+        }
+
+        boolean isSale = dao1.inputSaleView(pnoList, uno);
         boolean isCart = dao.saleDeleteCart(cnoList, uno);
-        boolean isSale = dao1.inputSaleView(cnoList, uno);
 
         if (isCart && isSale) {
             isTrue = true;
