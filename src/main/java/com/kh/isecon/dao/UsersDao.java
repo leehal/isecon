@@ -50,7 +50,7 @@ public class UsersDao {
     public Boolean UserUpDate(UsersVo vo) {
         // 유저 정보 수정
         try {
-            String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=?, UMIG=? WHERE uno=?";
+            String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=?, UIMG=? WHERE uno=?";
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getPwd());
