@@ -48,6 +48,7 @@ public class UsersDao {
     }
 
     public Boolean UserUpDate(UsersVo vo) {
+        boolean isTrue = false;
         // 유저 정보 수정
         try {
             String query = "UPDATE USERS SET PWD=?, PHONE=?, ADDRESS=?, NICKNAME=?, UIMG=? WHERE uno=?";
@@ -57,17 +58,18 @@ public class UsersDao {
             pstmt.setString(2, vo.getPhone());
             pstmt.setString(3, vo.getAddress());
             pstmt.setString(4, vo.getNickname());
-            pstmt.setInt(5, vo.getUno());
-            pstmt.setString(6, vo.getUimg());
+            pstmt.setString(5, vo.getUimg());
+            pstmt.setInt(6, vo.getUno());
             pstmt.executeUpdate();
-            return true;
+            isTrue = true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+
         } finally {
             Common.close(pstmt);
             Common.close(conn);
         }
+        return isTrue;
     }
 
     public boolean UsersDelete(int uno) {
