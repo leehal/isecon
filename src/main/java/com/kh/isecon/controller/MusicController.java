@@ -49,5 +49,14 @@ public class MusicController {
         boolean isTrue = dao.playListInsert(mnoList,uno,plname);
         return ResponseEntity.ok(isTrue);
     }
+    @PostMapping("plnameup")
+    public ResponseEntity<Boolean> plNameUpdate(@RequestBody MusicVo vo){
+        PlayListDao dao = new PlayListDao();
+        String oriplName = vo.getMname(); // 기존이름 mname에 넣어오기
+        String newplName = vo.getSurl(); // 새 이름 surl에 넣어오기
+        int uno = vo.getMno(); // uno mno에 넣어오기
+        boolean isTrue = dao.playListUpdatePlname(oriplName,newplName,uno);
+        return ResponseEntity.ok(isTrue);
+    }
 
 }

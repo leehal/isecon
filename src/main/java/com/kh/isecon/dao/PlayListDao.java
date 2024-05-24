@@ -67,7 +67,8 @@ public class PlayListDao {
 
 //    Veiw단에서 기존이름을 저장해주고 바뀐이름과 원래의 이름 둘 다 저장해 보내줘야함. useState 2개 사용
 //    double 클릭시 이름을 바꿀 수 있게 되어 새 이름과 기존 이름을 보내 플리의 이름을 바꿈
-    public void playListUpdatePlname(String oriplname, String newplname, int uno){
+    public boolean playListUpdatePlname(String oriplname, String newplname, int uno){
+        boolean isTrue = false;
             String sql = "UPDATE playlist SET plname = ? WHERE plname = ? and uno = ?";
         try {
             conn = Common.getConnection();
@@ -77,10 +78,10 @@ public class PlayListDao {
             pstmt.setString(2, oriplname);
             pstmt.setInt(3, uno);
             pstmt.executeUpdate();
-
+            isTrue = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return isTrue;
     }
 }
