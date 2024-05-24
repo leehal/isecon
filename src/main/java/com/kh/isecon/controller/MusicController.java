@@ -4,6 +4,7 @@ import com.kh.isecon.dao.MusicDao;
 import com.kh.isecon.dao.PlayListDao;
 import com.kh.isecon.vo.InsertPlayListVo;
 import com.kh.isecon.vo.MusicVo;
+import com.kh.isecon.vo.PlayListUpdateVo;
 import com.kh.isecon.vo.PlayListVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,12 +51,18 @@ public class MusicController {
         return ResponseEntity.ok(isTrue);
     }
     @PostMapping("plnameup")
-    public ResponseEntity<Boolean> plNameUpdate(@RequestBody MusicVo vo){
+    public ResponseEntity<Boolean> plNameUpdate(@RequestBody PlayListUpdateVo vo){
         PlayListDao dao = new PlayListDao();
-        String oriplName = vo.getMname(); // 기존이름 mname에 넣어오기
-        String newplName = vo.getSurl(); // 새 이름 surl에 넣어오기
-        int uno = vo.getMno(); // uno mno에 넣어오기
-        boolean isTrue = dao.playListUpdatePlname(oriplName,newplName,uno);
+        String oriplName = vo.getOldPlName(); // 기존이름 mname에 넣어오기
+        String newplName = vo.getNewPlName(); // 새 이름 surl에 넣어오기
+        int uno = vo.getUno(); // uno mno에 넣어오기
+        List<Integer> mnoList = vo.getMnoList();
+        boolean isTrue = false;
+        boolean deleteTrue = dao.playListNameDelete(oriplName,uno);
+        boolean insertTrue = dao.playListInsert(mnoList,uno,newplName);
+        if(deleteTrue && insertTrue){
+            isTrue = true;
+        }
         return ResponseEntity.ok(isTrue);
     }
 

@@ -84,4 +84,20 @@ public class PlayListDao {
         }
         return isTrue;
     }
+    public boolean playListNameDelete(String oldPlName, int uno){
+        boolean isTrue = false;
+        String sql = "delete from PLAYLIST where plname= ? and uno= ?";
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1,oldPlName);
+            pstmt.setInt(2, uno);
+            pstmt.executeUpdate();
+            isTrue = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isTrue;
+    }
 }
