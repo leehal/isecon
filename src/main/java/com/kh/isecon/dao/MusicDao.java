@@ -139,4 +139,29 @@ public class MusicDao {
         }
     }
 
+    public List<MusicVo> searchMusic(String search) {
+        String sql = "select * from music where mname like ? or singer like ?";
+        List<MusicVo> list = new ArrayList<>();
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            String searchWord = "%" + search + "%";
+            pstmt.setString(1, searchWord);
+            pstmt.setString(2, searchWord);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int mno = rs.getInt("mno");
+                String mname = rs.getString("mname");
+                String singer = rs.getString("singer");
+                String surl = rs.getString("surl");
+
+                MusicVo vo = new MusicVo(mno, mname, singer, surl);
+                System.out.println(vo.getMno());
+                list.add(vo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

@@ -66,4 +66,11 @@ public class MusicController {
         return ResponseEntity.ok(isTrue);
     }
 
+    @GetMapping("plsearch/{search}")
+    public ResponseEntity<List<MusicVo>> plSearchList(@PathVariable String search){
+        MusicDao dao = new MusicDao();
+        List<MusicVo> list = dao.searchMusic(search);
+        return ResponseEntity.ok(list);
+    }
+
 }
