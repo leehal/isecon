@@ -26,9 +26,9 @@
      리액트는 스타일드 컴포넌트 방식을 사용하였으며 해당 깃은 
     </p>
     <p>
-     <a src="https://github.com/leehal/isecon-react"/>
+     <a src="https://github.com/leehal/isecon-react">여기에 있습니다!</a>
     </p>
-       <p>여기에 있습니다!</p>
+<!--        <p>여기에 있습니다!</p> -->
     <p>
 <!--       <img src="https://github.com/limfarmer/find_nimo/assets/129915370/5c44308c-c302-448c-9467-c42cee2bb962"> -->
 <!--       <img src="https://github.com/limfarmer/find_nimo/assets/129915370/2567fa7f-0563-49f3-bf10-a5dbc24b90de"> -->
