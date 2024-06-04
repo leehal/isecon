@@ -1,8 +1,6 @@
 
   <div>
-    <img src="https://github.com/leehal/isecon/assets/129915370/da919924-2591-4654-8fda-e3b150934405">
-<!-- ![image](https://github.com/leehal/isecon/assets/129915370/da919924-2591-4654-8fda-e3b150934405) -->
-
+    <img src="https://github.com/leehal/isecon/assets/129915370/b5b91fc0-55cd-4def-bca2-b2baa238572c">
 
   </div>
  <div  align=center>
